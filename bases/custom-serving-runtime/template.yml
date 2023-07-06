@@ -16,7 +16,7 @@ objects:
   metadata:
     annotations:
       maxLoadingConcurrency: "2"
-      openshift.io/display-name: Triton runtime 23.05 - added on 20230630
+      openshift.io/display-name: Triton runtime 23.05
     labels:
       name: triton-23.05-20230630
     name: triton-23.05-20230630
