@@ -9,3 +9,4 @@ bases:
 - ../../bases/rhods
 - ../../bases/minio
 - ../../bases/data-science-project
+- ../../bases/custom-serving-runtime
