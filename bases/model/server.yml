@@ -10,6 +10,7 @@ metadata:
     opendatahub.io/template-name: triton-23.05-20230630
     openshift.io/display-name: Triton
     argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   labels:
     name: triton
     opendatahub.io/dashboard: "true"

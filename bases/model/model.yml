@@ -4,6 +4,8 @@ metadata:
   annotations:
     openshift.io/display-name: fraud
     serving.kserve.io/deploymentMode: ModelMesh
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   labels:
     name: fraud
     opendatahub.io/dashboard: "true"
