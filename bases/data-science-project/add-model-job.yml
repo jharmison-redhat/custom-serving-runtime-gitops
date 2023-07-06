@@ -2,7 +2,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: add-model-job.yml
+  name: add-model-job
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
