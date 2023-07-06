@@ -5,7 +5,9 @@ metadata:
     opendatahub.io/template-enabled: "true"
     tags: triton-23.05-20230630,servingruntime
     argocd.argoproj.io/sync-wave: "2"
+    description: Nvidia Triton Inference Server Runtime Definition
   labels:
+    opendatahub.io/configurable: "true"
     opendatahub.io/dashboard: "true"
   name: triton-inference-server
 objects:
