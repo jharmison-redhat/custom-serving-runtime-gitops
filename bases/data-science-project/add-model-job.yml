@@ -11,6 +11,19 @@ spec:
     spec:
       serviceAccount: serving-demo-setup
       serviceAccountName: serving-demo-setup
+      initContainers:
+      - name: wait-for-imagestream
+        image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/bash"]
+        args:
+        - -ec
+        - |-
+          echo -n 'Waiting for RHODS to deploy ImageStreams'
+          while ! oc get istag -n redhat-ods-applications 2>/dev/null | grep -qF s2i-generic-data-science-notebook:1.2; do
+            echo -n .
+            sleep 5
+          done; echo
       containers:
       - name: add-model
         image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:1.2
