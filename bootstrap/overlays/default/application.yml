@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: rhods-notebook
+  name: custom-serving
   namespace: openshift-gitops
 spec:
   project: default
@@ -17,11 +17,3 @@ spec:
       selfHeal: true
     syncOptions:
     - RespectIgnoreDifferences=true
-  ignoreDifferences:
-  - group: "kubeflow.org"
-    kind: "Notebook"
-    namespace: notebook-demo
-    jsonPointers:
-    - /spec/template/spec/containers
-    - /spec/template/spec/volumes
-    - /spec/template/spec/volumes
