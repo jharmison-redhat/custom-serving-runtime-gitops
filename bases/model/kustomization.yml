@@ -9,3 +9,4 @@ namespace: serving-demo
 
 resources:
 - server.yml
+- model.yml

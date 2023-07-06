@@ -10,3 +10,4 @@ bases:
 - ../../bases/minio
 - ../../bases/data-science-project
 - ../../bases/custom-serving-runtime
+- ../../bases/model
