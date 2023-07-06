@@ -1,0 +1,27 @@
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: add-model-job.yml
+  annotations:
+    argocd.argoproj.io/sync-wave: "2"
+spec:
+  backoffLimit: 4
+  template:
+    spec:
+      serviceAccount: serving-demo-setup
+      serviceAccountName: serving-demo-setup
+      containers:
+      - name: add-model
+        image: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/s2i-generic-data-science-notebook:1.2
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/bash"]
+        args:
+        - -ec
+        - |-
+          curl -LO https://ai-on-openshift.io/odh-rhods/img-triton/card.fraud.detection.onnx
+          python3 -c 'filename = "card.fraud.detection.onnx"; import boto3, os; s3 = boto3.client("s3"); f = open(filename, "rb"); s3.upload_fileobj(f, os.getenv["AWS_S3_BUCKET"], filename); f.close()'
+        envFrom:
+        - secretRef:
+            name: aws-connection-minio
+      restartPolicy: Never

@@ -11,3 +11,4 @@ resources:
 - project.yml
 - setup-serviceaccount.yml
 - create-data-connection.yml
+- add-model-job.yml
