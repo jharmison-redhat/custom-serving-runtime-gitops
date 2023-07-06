@@ -1,0 +1,27 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rhods-notebook
+  namespace: openshift-gitops
+spec:
+  project: default
+  destination:
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://github.com/jharmison-redhat/custom-serving-runtime-gitops.git'
+    path: overlays/default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - RespectIgnoreDifferences=true
+  ignoreDifferences:
+  - group: "kubeflow.org"
+    kind: "Notebook"
+    namespace: notebook-demo
+    jsonPointers:
+    - /spec/template/spec/containers
+    - /spec/template/spec/volumes
+    - /spec/template/spec/volumes

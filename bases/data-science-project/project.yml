@@ -1,0 +1,13 @@
+---
+apiVersion: project.openshift.io/v1
+kind: Project
+metadata:
+  annotations:
+    openshift.io/description: Project created to demonstrate custom serving runtimes.
+    openshift.io/display-name: Serving Demo
+    argocd.argoproj.io/sync-wave: "0"
+  labels:
+    kubernetes.io/metadata.name: serving-demo
+    modelmesh-enabled: "true"
+    opendatahub.io/dashboard: "true"
+  name: serving-demo
