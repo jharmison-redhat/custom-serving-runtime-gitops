@@ -21,6 +21,12 @@ bootstrap: $(KUBECONFIG)
 		while [ "$$(oc get subscription.operators -n openshift-operators openshift-gitops-operator -ojsonpath='{.status.state}')" != "AtLatestKnown" ]; do sleep 5; done; oc apply -k bootstrap/ || \
 		while ! oc get namespace openshift-gitops; do sleep 5; done; oc apply -k bootstrap/
 
+.PHONY: already-have-rhods
+already-have-rhods: $(KUBECONFIG)
+	oc apply -k bootstrap/overlays/already-have-rhods/ || \
+		while [ "$$(oc get subscription.operators -n openshift-operators openshift-gitops-operator -ojsonpath='{.status.state}')" != "AtLatestKnown" ]; do sleep 5; done; oc apply -k bootstrap/overlays/already-have-rhods/ || \
+		while ! oc get namespace openshift-gitops; do sleep 5; done; oc apply -k bootstrap/overlays/already-have-rhods/
+
 .PHONY: credentials
 credentials: $(KUBECONFIG)
 	@if [ -f creds.env ]; then \

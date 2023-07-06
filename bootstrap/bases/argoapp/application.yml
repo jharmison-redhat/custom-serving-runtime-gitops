@@ -3,7 +3,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: custom-serving
-  namespace: openshift-gitops
 spec:
   project: default
   destination:

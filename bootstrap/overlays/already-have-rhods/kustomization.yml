@@ -1,0 +1,20 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: bootstrap
+
+commonLabels:
+  purpose: custom-serving-runtime
+  component: bootstrap
+
+bases:
+- ../../bases/openshift-gitops
+- ../../bases/argoapp
+
+patches:
+- path: patch.yml
+  target:
+    group: argoproj.io
+    kind: Application
+    name: custom-serving
