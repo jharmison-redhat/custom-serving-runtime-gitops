@@ -47,7 +47,7 @@ Finally, if you're deploying to a cluster that already has RHODS installed (but 
 make already-have-rhods
 ```
 
-Wait just a few moments for the terminal to return, and you should be able to log in to the ArgoCD instance to watch the rollout of RHODS, an S3 endpoint, and the customized notebook image and instance. To help you look up that endpoint, you can run:
+Wait just a few moments for the terminal to return, and you should be able to log in to the ArgoCD instance to watch the rollout of RHODS, an S3 endpoint, and the model server and model. To help you look up that endpoint, you can run:
 
 ```shell
 make credentials # KUBECONFIG=/path/to/your/kubeconfig
