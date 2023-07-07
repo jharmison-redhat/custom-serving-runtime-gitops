@@ -11,7 +11,7 @@ If you are looking to deploy model inferencing into production, it's unlikely th
 Prerequisites
 -------------
 
-- `oc` and `make` in your `$PATH`
+- `oc`, `make`, and `jq` in your `$PATH`
 - A _fresh_ OpenShift cluster. Deconflicting the things that are deployed here for a real cluster should be done carefully, and this demo is designed to inspire - not to drive production.
   - You can have RHODS already deployed, for simplicity's sake.
   - Make sure that your cluster has enough available resources to support all of the deployments here. Two m5.xlarge work instances in AWS is not enough, as an example. I tested using a cluster with three m5.4xlarge instances, but that's overkill - I think two or three m5.2xlarge instances would work fine.
@@ -79,7 +79,26 @@ At the end of the deployment, by applying a simple OpenShift GitOps Application 
 oc port-forward -n serving-demo svc/modelmesh-serving 8008:8008 >/dev/null 2>&1 &
 port_fwd=$!
 sleep 1
-curl -X POST -s http://localhost:8008/v2/models/fraud/infer -d '{"inputs": [{ "name": "dense_input", "shape": [1, 7], "datatype": "FP32", "data": [57.87785658389723,0.3111400080477545,1.9459399775518593,1.0,1.0,0.0,0.0]}]}' | jq .
+svc=http://localhost:8008/v2/models/fraud/infer
+data='{
+  "inputs": [
+    {
+      "name": "dense_input",
+      "shape": [1, 7],
+      "datatype": "FP32",
+      "data": [
+        57.87785658389723,
+        0.3111400080477545,
+        1.9459399775518593,
+        1.0,
+        1.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}'
+curl -X POST -s "$svc" -d "$data" | jq .
 kill $port_fwd
 ```
 
