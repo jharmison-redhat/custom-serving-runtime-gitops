@@ -9,8 +9,8 @@ spec:
   backoffLimit: 4
   template:
     spec:
-      serviceAccount: serving-demo-setup
-      serviceAccountName: serving-demo-setup
+      serviceAccount: serving-demo-gitops-setup
+      serviceAccountName: serving-demo-gitops-setup
       containers:
       - name: create-data-connection
         image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
