@@ -43,7 +43,7 @@ spec:
             AWS_ACCESS_KEY_ID: ${id}
             AWS_SECRET_ACCESS_KEY: ${secret}
             AWS_DEFAULT_REGION: us
-            AWS_S3_ENDPOINT: http://minio.minio.svc:9000
+            AWS_S3_ENDPOINT: http://minio.custom-serving-gitops.svc:9000
             AWS_S3_BUCKET: serving-demo-gitops
           EOF
       restartPolicy: Never
