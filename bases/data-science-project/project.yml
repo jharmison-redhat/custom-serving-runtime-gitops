@@ -4,10 +4,10 @@ kind: Project
 metadata:
   annotations:
     openshift.io/description: Project created to demonstrate custom serving runtimes.
-    openshift.io/display-name: Serving Demo
+    openshift.io/display-name: Serving Demo Gitops
     argocd.argoproj.io/sync-wave: "0"
   labels:
-    kubernetes.io/metadata.name: serving-demo
+    kubernetes.io/metadata.name: serving-demo-gitops
     modelmesh-enabled: "true"
     opendatahub.io/dashboard: "true"
-  name: serving-demo
+  name: serving-demo-gitops

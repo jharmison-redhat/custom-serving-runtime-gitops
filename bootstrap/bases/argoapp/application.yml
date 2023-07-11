@@ -10,8 +10,9 @@ spec:
   destination:
     server: 'https://kubernetes.default.svc'
   source:
-    repoURL: 'https://github.com/jharmison-redhat/custom-serving-runtime-gitops.git'
+    repoURL: 'https://github.com/rh-aiservices-bu/custom-serving-runtime-gitops-example.git'
     path: overlays/default
+    targetRevision: adapt-post-fork
   syncPolicy:
     automated:
       prune: true

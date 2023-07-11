@@ -5,7 +5,7 @@ kind: Kustomization
 commonLabels:
   component: model
 
-namespace: serving-demo
+namespace: serving-demo-gitops
 
 resources:
 - server.yml

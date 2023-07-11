@@ -2,7 +2,7 @@ SHELL := /bin/bash
 
 .EXPORT_ALL_VARIABLES:
 
-KUBECONFIG = /tmp/custom-serving-demo
+KUBECONFIG = /tmp/custom-serving-demo-gitops
 
 .PHONY: all
 all: bootstrap

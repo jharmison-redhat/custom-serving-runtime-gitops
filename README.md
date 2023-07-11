@@ -1,7 +1,7 @@
 Custom Model Serving Runtime Demo
 =================================
 
-This repository demonstrates how to manage [Red Hat OpenShift Data Science](https://www.redhat.com/en/resources/openshift-data-science-brief) (RHODS) resources using a GitOps model with [OpenShift GitOps](https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops) based on [ArgoCD](https://argo-cd.readthedocs.io/en/stable/).
+This repository demonstrates how to manage [Red Hat OpenShift Data Science](https://www.redhat.com/en/resources/openshift-data-science-brief) (RHODS) resources using a GitOps model with [OpenShift GitOps](https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops) based on [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). If you are instead interested in the more
 
 The Point
 ---------
@@ -41,7 +41,7 @@ If you're using a KubeConfig, run the following instead:
 make KUBECONFIG=/path/to/your/kubeconfig
 ```
 
-Finally, if you're deploying to a cluster that already has RHODS installed (but not OpenShift GitOps, a Data Science Project named serving-demo, or a MinIO deployment in the minio namespace), you can run either of the above with an alternate target:
+Finally, if you're deploying to a cluster that already has RHODS installed (but not OpenShift GitOps, a Data Science Project named **serving-demo-gitops**, or a MinIO deployment in the minio namespace), you can run either of the above with an alternate target:
 
 ```shell
 make already-have-rhods
@@ -64,7 +64,7 @@ We deployed [Upstream MinIO](https://github.com/minio/minio) in its own namespac
 
 We deployed RHODS itself, using the APIs for interacting with the OpenShift Operator Lifecycle Manager in the same way that the OperatorHub UI allows you to.
 
-A Data Science Project (DSP) is a RHODS abstraction that sits on top of the traditional OpenShift Project or Kubernetes Namespace. This extra layer of metadata uses traditional OpenShift constructs for isolation and RBAC, but allows the Data Science context to bubble up into the RHODS dashboard. Here, we deployed a DSP named "Serving Demo" in the OpenShift Project "serving-demo." into the Serving Demo DSP, a Data Connection via a Kubernetes Secret, for our MinIO connection. This surfaces automatically in the RHODS dashboard appropriately. We also deployed a one-time Job to copy a model that we've already trained (a simple credit card fraud detection model) into our object store, using our Data Connection.
+A Data Science Project (DSP) is a RHODS abstraction that sits on top of the traditional OpenShift Project or Kubernetes Namespace. This extra layer of metadata uses traditional OpenShift constructs for isolation and RBAC, but allows the Data Science context to bubble up into the RHODS dashboard. Here, we deployed a DSP named "Serving Demo" in the OpenShift Project "serving-demo-gitops." into the Serving Demo DSP, a Data Connection via a Kubernetes Secret, for our MinIO connection. This surfaces automatically in the RHODS dashboard appropriately. We also deployed a one-time Job to copy a model that we've already trained (a simple credit card fraud detection model) into our object store, using our Data Connection.
 
 From there, a Serving Runtime for ModelMesh was defined. This isn't strictly required for the rest of the demo, as this mostly affects the options we have in the Dashboard for selecting the runtime for a new model server deployment. It does allow us to ensure that our model server surfaces in the dashboard, though, so it's worth doing if you're interacting with the RHODS dashboard at all. These definitions happen via an OpenShift Template object in the `redhat-ods-applications` Namespace. The template has some basic metadata for bubbling into the RHODS console, equivalent to the form-fields that are fillable in the Dashboard UI as [described in the documentation](https://access.redhat.com/documentation/en-us/red_hat_openshift_data_science/1/html/working_on_data_science_projects/model-serving-on-openshift-data-science_model-serving#adding-a-custom-model-serving-runtime_model-serving).
 
@@ -76,7 +76,7 @@ Validating Customizations
 At the end of the deployment, by applying a simple OpenShift GitOps Application defintion, we have a fully functional inference endpoint ready for queries. We exposed it only through an internal Service in our cluster, so it's not available publicly. Let's use a port-forward to ensure that it's working as expected:
 
 ```shell
-oc port-forward -n serving-demo svc/modelmesh-serving 8008:8008 >/dev/null 2>&1 &
+oc port-forward -n serving-demo-gitops svc/modelmesh-serving 8008:8008 >/dev/null 2>&1 &
 port_fwd=$!
 sleep 1
 svc=http://localhost:8008/v2/models/fraud/infer
@@ -123,7 +123,7 @@ You should see output similar to the following, if the model server is respondin
     }
   ]
 }
-[1]+  Terminated              oc port-forward -n serving-demo svc/modelmesh-serving 8008:8008 > /dev/null 2>&1
+[1]+  Terminated              oc port-forward -n serving-demo-gitops svc/modelmesh-serving 8008:8008 > /dev/null 2>&1
 ```
 
 Closing
