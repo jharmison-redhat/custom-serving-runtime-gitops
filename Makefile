@@ -31,8 +31,8 @@ already-have-rhods: $(KUBECONFIG)
 credentials: $(KUBECONFIG)
 	@if [ -f creds.env ]; then \
 		source creds.env; \
-		echo "Username: $$USER"; \
-		echo "Password: $$PASSWORD"; \
+		echo "OpenShift Username: $$USER"; \
+		echo "OpenShift Password: $$PASSWORD"; \
 		echo; \
 	fi
 	@if oc get route -n openshift-gitops openshift-gitops-server &>/dev/null; then \
@@ -40,4 +40,8 @@ credentials: $(KUBECONFIG)
 	fi
 	@if oc get route -n redhat-ods-applications rhods-dashboard &>/dev/null; then \
 		echo "RHODS: https://$$(oc get route -n redhat-ods-applications rhods-dashboard -ojsonpath='{.status.ingress[0].host}')"; \
+	fi
+	@if oc get route -n custom-serving-gitops minio-console &>/dev/null; then \
+		echo "Minio Console: https://$$(oc get route -n custom-serving-gitops minio-console -ojsonpath='{.status.ingress[0].host}')"; \
+		echo "add the username and password echo here too"
 	fi
