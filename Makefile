@@ -41,7 +41,7 @@ credentials: $(KUBECONFIG)
 	@if oc get route -n redhat-ods-applications rhods-dashboard &>/dev/null; then \
 		echo "RHODS: https://$$(oc get route -n redhat-ods-applications rhods-dashboard -ojsonpath='{.status.ingress[0].host}')"; \
 	fi
-	@if oc get route -n custom-serving-gitops minio-console &>/dev/null; then \
+	@if oc get route -n serving-demo-gitops minio-console &>/dev/null; then \
 		echo "Minio Console: https://$$(oc get route -n custom-serving-gitops minio-console -ojsonpath='{.status.ingress[0].host}')"; \
 		echo "add the username and password echo here too"
 	fi
