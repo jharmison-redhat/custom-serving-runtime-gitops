@@ -29,22 +29,44 @@ Prerequisites
 Usage
 -----
 
-If you're using a creds.env file, run the following:
+Clone this project (for example, into the terminal of your Jupyter Notebook)
 
 ```shell
-make
+git clone https://github.com/rh-aiservices-bu/custom-serving-runtime-gitops-example.git
 ```
 
-If you're using a KubeConfig, run the following instead:
+and get yourself into the right directory:
 
-```shell
-make KUBECONFIG=/path/to/your/kubeconfig
+```
+cd ~/custom-serving-runtime-gitops-example
 ```
 
-Finally, if you're deploying to a cluster that already has RHODS installed (but not OpenShift GitOps, a Data Science Project named **serving-demo-gitops**, or a MinIO deployment in the minio namespace), you can run either of the above with an alternate target:
+generate the `creds.env` file:
 
 ```shell
+cat << EOF > creds.env
+CLUSTER=https://<YOUR_CLUSTER_API_ENDPOINT>:6443
+USER=<YOUR_USER_NAME>
+PASSWORD=<YOUR_PASSWORD>
+EOF
+```
+
+If you're deploying to a cluster that already has RHODS installed (but not OpenShift GitOps, a Data Science Project named **serving-demo-gitops**, or a MinIO deployment in that namespace), you can run:
+
+```shell
+## if you a creds file:
 make already-have-rhods
+## if you a kubeconfig file:
+#make already-have-rhods KUBECONFIG=/path/to/your/kubeconfig
+```
+
+If you want the process to also install RHODS for you, you can instead run:
+
+```shell
+## if you a creds file:
+make
+## if you a kubeconfig file:
+#make KUBECONFIG=/path/to/your/kubeconfig
 ```
 
 Wait just a few moments for the terminal to return, and you should be able to log in to the ArgoCD instance to watch the rollout of RHODS, an S3 endpoint, and the model server and model. To help you look up that endpoint, you can run:
