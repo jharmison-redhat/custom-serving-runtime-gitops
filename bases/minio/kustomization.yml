@@ -2,13 +2,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: minio
+namespace: custom-serving-gitops
 
 commonLabels:
   component: minio
 
 resources:
-- namespace.yml
+# - namespace.yml
 - pvc.yml
 - serviceaccount.yml
 - create-root-user-job.yml
