@@ -2,7 +2,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: custom-serving
+  name: custom-serving-gitops
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
