@@ -1,13 +1,37 @@
+---
 apiVersion: serving.kserve.io/v1beta1
 kind: InferenceService
 metadata:
   annotations:
-    openshift.io/display-name: fraud
+    openshift.io/display-name: fraud1
     serving.kserve.io/deploymentMode: ModelMesh
     argocd.argoproj.io/sync-wave: "3"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
   labels:
     name: fraud
+    opendatahub.io/dashboard: "true"
+  name: fraud1
+spec:
+  predictor:
+    model:
+      modelFormat:
+        name: onnx
+        version: "1"
+      runtime: triton
+      storage:
+        key: aws-connection-minio
+        path: fraud/
+---
+apiVersion: serving.kserve.io/v1beta1
+kind: InferenceService
+metadata:
+  annotations:
+    openshift.io/display-name: fraud2
+    serving.kserve.io/deploymentMode: ModelMesh
+    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  labels:
+    name: fraud2
     opendatahub.io/dashboard: "true"
   name: fraud
 spec:
