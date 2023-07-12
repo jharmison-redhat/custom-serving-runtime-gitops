@@ -42,6 +42,7 @@ credentials: $(KUBECONFIG)
 		echo "RHODS: https://$$(oc get route -n redhat-ods-applications rhods-dashboard -ojsonpath='{.status.ingress[0].host}')"; \
 	fi
 	@if oc get route -n serving-demo-gitops minio-console &>/dev/null; then \
-		echo "Minio Console: https://$$(oc get route -n custom-serving-gitops minio-console -ojsonpath='{.status.ingress[0].host}')"; \
-		echo "add the username and password echo here too"
+		echo "Minio Console : https://$$(oc get route -n serving-demo-gitops minio-console -ojsonpath='{.status.ingress[0].host}')"; \
+		echo "Minio User    : $$(oc get secret aws-connection-minio -n serving-demo-gitops -o jsonpath='{.data.AWS_ACCESS_KEY_ID}' | base64 -d) "; \
+		echo "Minio Password: $$(oc get secret aws-connection-minio -n serving-demo-gitops -o jsonpath='{.data.AWS_SECRET_ACCESS_KEY}' | base64 -d) "; \
 	fi
