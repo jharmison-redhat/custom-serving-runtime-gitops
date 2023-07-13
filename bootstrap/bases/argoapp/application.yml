@@ -13,7 +13,7 @@ spec:
     repoURL: 'https://github.com/rh-aiservices-bu/custom-serving-runtime-gitops-example.git'
     path: overlays/default
     ## change that to "main" when this gets merged back into the main branch.
-    targetRevision: adapt-post-fork
+    targetRevision: main
   syncPolicy:
     automated:
       prune: true
