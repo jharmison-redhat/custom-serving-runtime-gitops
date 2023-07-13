@@ -1,7 +1,8 @@
 Custom Model Serving Runtime Demo
 =================================
 
-This repository demonstrates how to manage [Red Hat OpenShift Data Science](https://www.redhat.com/en/resources/openshift-data-science-brief) (RHODS) resources using a GitOps model with [OpenShift GitOps](https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops) based on [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). If you are instead interested in the more
+This repository demonstrates how to manage [Red Hat OpenShift Data Science](https://www.redhat.com/en/resources/openshift-data-science-brief) (RHODS) resources using a GitOps model with [OpenShift GitOps](https://www.redhat.com/en/technologies/cloud-computing/openshift/gitops) based on [ArgoCD](https://argo-cd.readthedocs.io/en/stable/). If you are instead interested in the more manual and UI Driven process to achieve the same thing, you should start with [this article](https://ai-on-openshift.io/odh-rhods/custom-runtime-triton/).
+
 
 The Point
 ---------
